@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<body style="margin:0;padding:0;background:#f4f5f7;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1f2328;">
+<div style="max-width:680px;margin:0 auto;padding:20px;">
+  <h1 style="font-size:20px;margin:0 0 4px;">{% if total %}{{ total }} new job match{{ "" if total == 1 else "es" }}{% else %}No new matches{% endif %}</h1>
+  <p style="margin:0 0 16px;color:#57606a;font-size:13px;">
+    Run {{ run_time }} UTC &middot; {{ report.scanned }} postings scanned from {{ report.fetched|length }} sources &middot;
+    {{ report.candidates }} passed filters &middot; {{ report.new }} new
+  </p>
+  {% for job in jobs %}
+  <div style="background:#ffffff;border:1px solid #d0d7de;border-radius:8px;padding:14px 16px;margin-bottom:10px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td style="vertical-align:top;">
+        <a href="{{ job.url }}" style="font-size:16px;font-weight:600;color:#0969da;text-decoration:none;">{{ job.title }}</a>
+        <div style="font-size:13px;color:#57606a;margin-top:2px;">
+          {{ job.company }}{% if job.location %} &middot; {{ job.location }}{% endif %}{% if job.posted_at %} &middot; posted {{ job.posted_at.strftime("%d %b") }}{% endif %}
+        </div>
+      </td>
+      <td style="vertical-align:top;text-align:right;width:56px;">
+        <span style="display:inline-block;min-width:36px;text-align:center;padding:4px 6px;border-radius:12px;font-weight:700;font-size:13px;color:#ffffff;background:{{ badge(job.score) }};">{{ job.score }}</span>
+      </td>
+    </tr></table>
+    <div style="font-size:12px;color:#57606a;margin-top:8px;">{{ job.reasons|join(" · ") }}</div>
+    <div style="font-size:12px;color:#8c959f;margin-top:4px;">
+      via {{ job.source }}{% if job.extra.also_on %} (also {{ job.extra.also_on|join(", ") }}){% endif %}
+      {% if job.extra.pack_link %}&middot; <a href="{{ job.extra.pack_link }}" style="color:#0969da;">application pack</a>{% endif %}
+    </div>
+  </div>
+  {% endfor %}
+  {% if total > jobs|length %}
+  <p style="font-size:13px;color:#57606a;">&hellip;and {{ total - jobs|length }} more lower-scoring matches (see last_run.json in the run artifacts).</p>
+  {% endif %}
+  {% if report.errors %}
+  <div style="font-size:12px;color:#9a6700;background:#fff8c5;border:1px solid #d4a72c;border-radius:6px;padding:8px 12px;margin-top:16px;">
+    <strong>Source problems this run</strong>
+    <ul style="margin:4px 0 0;padding-left:18px;">{% for error in report.errors[:15] %}<li>{{ error }}</li>{% endfor %}</ul>
+  </div>
+  {% endif %}
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+
+# Run outputs and local state (in GitHub Actions, state lives on the `state` branch)
+output/
+state/
+.state/
+
+# Original CV PDFs stay local; profile.yaml carries what the tool needs
+CV's/

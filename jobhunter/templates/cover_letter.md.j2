@@ -1,0 +1,14 @@
+Dear Hiring Team at {{ job.company }},
+
+I am applying for the {{ job.title }} role{% if job.location %} ({{ job.location }}){% endif %}. {{ opening }}
+
+The parts of my background most relevant to this role:
+
+{% for point in talking_points %}
+- {{ point }}
+{% endfor %}
+
+{{ closing }}
+
+Kind regards,
+{{ c.name }}

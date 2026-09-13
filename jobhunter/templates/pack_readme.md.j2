@@ -1,0 +1,36 @@
+# {{ job.title }} | {{ job.company }}
+
+- **Score:** {{ job.score }}{% if job.reasons %} ({{ job.reasons|join("; ") }}){% endif %}
+
+- **Location:** {{ job.location or "n/a" }}
+- **Posted:** {{ job.posted_at.strftime("%d %b %Y") if job.posted_at else "unknown" }}
+- **Link:** {{ job.url }}
+- **Found via:** {{ job.source }}{% if job.extra.also_on %} (also {{ job.extra.also_on|join(", ") }}){% endif %}
+
+- **Generated:** {{ now.strftime("%Y-%m-%d %H:%M") }} UTC; cover letter by {{ llm_model or "static template" }}
+
+## Before you apply
+
+- [ ] Read the posting: check nationality, language, visa and years-of-experience requirements.
+- [ ] Review `cv_tailored.md` and export it to PDF.
+- [ ] Edit `cover_letter.md`; it is a draft, not a final letter.
+- [ ] Check `answers.yaml`. Fix any TODO in profile.yaml so it is right for every future job.
+- [ ] Submit the application yourself.
+
+{% if gaps %}
+## Possible gaps to address
+
+{% for gap in gaps %}
+- {{ gap }}
+{% endfor %}
+
+{% endif %}
+## Talking points
+
+{% for point in talking_points %}
+- {{ point }}
+{% endfor %}
+
+## Job description (as fetched)
+
+{{ job.description or "_Not available from this source; open the link._" }}

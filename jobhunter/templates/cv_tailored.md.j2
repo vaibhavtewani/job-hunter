@@ -1,0 +1,44 @@
+# {{ c.name or "Your Name" }}
+
+{{ ([c.location, c.email] + (c.phones or []) + [c.linkedin])|select|join(" | ") }}
+
+> Tailored for **{{ job.title }}** at **{{ job.company }}**. Bullets are re-ordered by relevance to the posting; their wording is unchanged from profile.yaml{% if llm_model %}, the summary was drafted by {{ llm_model }}{% endif %}. Review before sending.
+
+{{ summary }}
+
+## Education
+
+{% for e in education %}
+- **{{ e.institution }}**{% if e.location %}, {{ e.location }}{% endif %} ({{ e.dates }}): {{ e.degree }}{% if e.details %}. {{ e.details }}{% endif %}
+
+{% endfor %}
+
+## Experience
+
+{% for r in experience %}
+### {{ r.title }}, {{ r.company }} | {{ [r.location, r.dates]|select|join(" | ") }}
+
+{% for b in r.bullets %}
+- {{ b }}
+{% endfor %}
+
+{% endfor %}
+{% if projects %}
+## Projects & certifications
+
+{% for r in projects %}
+### {{ r.title }}, {{ r.org }} | {{ [r.location, r.dates]|select|join(" | ") }}
+
+{% for b in r.bullets %}
+- {{ b }}
+{% endfor %}
+
+{% endfor %}
+{% endif %}
+{% if skills %}
+## Skills
+
+{% for group, items in skills.items() %}
+- **{{ group }}:** {{ items|join(" | ") }}
+{% endfor %}
+{% endif %}

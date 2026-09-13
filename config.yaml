@@ -1,0 +1,315 @@
+# WHAT to search for and WHERE. WHO is searching lives in profile.yaml.
+# Supporting another profession = add a search profile below. Supporting another board = add a source adapter.
+# Any string may reference environment variables as ${VAR} or ${VAR:-default}.
+
+run:
+  max_age_days: 21            # ignore postings older than this; dedup state decides what is "new"
+  seen_retention_days: 120    # forget seen jobs after this long
+  max_enrich_per_run: 80      # detail fetches (descriptions) for new jobs whose listing had none
+  request_timeout_s: 20
+  state_dir: state            # overridden by STATE_DIR (GitHub Actions points it at the state branch)
+  output_dir: output
+
+digest:
+  min_score: 40               # a clean title match alone scores 40; penalties push jobs below
+  high_score: 70              # Telegram alert + application pack
+  max_jobs: 40                # cap per email
+
+notify:
+  email:
+    enabled: true             # needs GMAIL_ADDRESS + GMAIL_APP_PASSWORD (DIGEST_TO optional)
+    smtp_host: smtp.gmail.com
+    smtp_port: 465
+  telegram:
+    enabled: true             # needs TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID
+    min_score: 70
+
+applications:                 # application packs (tailored CV + cover letter draft + answers)
+  enabled: true
+  min_score: 70
+  max_per_run: 10
+
+llm:                          # optional; only used when ANTHROPIC_API_KEY is set
+  model: claude-haiku-4-5-20251001
+  max_tokens: 1500
+
+search_profiles:
+  - name: strategy-consulting-gcc
+    enabled: true
+    # A job title must contain at least one of these (whole words, case-insensitive)...
+    title_include:
+      - strategy
+      - strategic
+      - consultant
+      - consulting
+      - transformation
+      - business analyst
+      - commercial analyst
+      - commercial excellence
+      - business development
+      - partnerships
+      - growth analyst
+      - growth associate
+      - corporate development
+      - m&a
+      - investment analyst
+      - pricing analyst
+      - revenue analyst
+      - business operations
+      - bizops
+      - operations analyst
+      - program analyst
+      - pmo
+      - value creation
+      - chief of staff
+      - founders associate
+      - founder's associate
+      - management trainee
+      - graduate program
+      - graduate programme
+      - leadership development program
+      - rotational program
+    # ...and none of these. Checked against the TITLE only.
+    title_exclude:
+      - senior
+      - sr
+      - lead
+      - principal
+      - director
+      - head of
+      - vp
+      - vice president
+      - avp
+      - partner
+      - managing
+      - expert
+      - engineer
+      - developer
+      - architect
+      - sap
+      - oracle
+      - salesforce
+      - servicenow
+      - workday
+      - dynamics
+      - cyber
+      - security
+      - it consultant
+      - technical consultant
+      - recruitment
+      - recruiter
+      - sales consultant
+      - property consultant
+      - real estate
+      - insurance
+      - medical
+      - clinical
+      - nurse
+      - pharmacist
+      - teacher
+      - accountant
+      - auditor
+      - tax
+      - legal
+      - lawyer
+      # roles reserved for GCC nationals
+      - nationals only
+      - uae nationals
+      - emiratization
+      - emiratisation
+      - saudization
+      - saudisation
+      - qatarization
+      - qatarisation
+    locations: &gcc_locations
+      - dubai
+      - abu dhabi
+      - sharjah
+      - ajman
+      - ras al khaimah
+      - united arab emirates
+      - uae
+      - riyadh
+      - jeddah
+      - dammam
+      - khobar
+      - dhahran
+      - neom
+      - saudi arabia
+      - ksa
+      - doha
+      - qatar
+      - kuwait
+      - bahrain
+      - manama
+      - muscat
+      - oman
+      - gcc
+      - middle east
+      - mena
+    preferred_locations: [dubai, abu dhabi, riyadh, doha]
+    allow_remote: false
+    # Scoring (see jobhunter/scoring.py): +4 per keyword found in title/description (max 30)...
+    score_keywords:
+      - strategy
+      - consulting
+      - transformation
+      - commercial
+      - pricing
+      - revenue
+      - market sizing
+      - market research
+      - benchmarking
+      - competitive intelligence
+      - financial model
+      - financial modelling
+      - financial modeling
+      - business case
+      - due diligence
+      - m&a
+      - go-to-market
+      - gtm
+      - growth
+      - partnerships
+      - business development
+      - stakeholder
+      - problem solving
+      - hypothesis
+      - analytics
+      - dashboard
+      - excel
+      - powerpoint
+      - looker
+      - data-driven
+      - project management
+      - operations
+      - process improvement
+      - digital
+      - ai
+      - e-commerce
+      - marketplace
+      - travel
+      - hospitality
+      - startup
+      - entrepreneurial
+      - spanish
+      - hindi
+    # ...+6 per entry-level signal (max 15)...
+    boost_phrases:
+      - graduate
+      - recent graduate
+      - fresh graduate
+      - new grad
+      - entry level
+      - junior
+      - analyst
+      - associate
+      - trainee
+      - early career
+      - 0-1 years
+      - 0-2 years
+      - 1-2 years
+      - 1-3 years
+      - 1+ years
+      - 2+ years
+      - master's
+      - masters degree
+      - mim
+    # ...and -15 for each of these.
+    penalty_title: [manager, intern, internship]
+    penalty_text:
+      - 5+ years
+      - 6+ years
+      - 7+ years
+      - 8+ years
+      - 10+ years
+      - minimum 5 years
+      - at least 5 years
+      - fluent arabic
+      - arabic speaker
+      - native arabic
+      - arabic is required
+      - arabic is a must
+      - uae nationals
+      - uae national
+      - emirati nationals
+      - saudi nationals
+      - saudi national
+      - qatari nationals
+      - qatari national
+      - kuwaiti nationals
+      - omani nationals
+      - bahraini nationals
+
+  # Example second profession: copy, rename, set enabled: true.
+  - name: data-engineering-gcc
+    enabled: false
+    title_include: [data engineer, analytics engineer, etl developer, bi developer, data analyst]
+    title_exclude: [senior, sr, lead, principal, staff, director, head of, manager]
+    locations: *gcc_locations
+    preferred_locations: [dubai, riyadh]
+    score_keywords: [python, sql, spark, airflow, dbt, snowflake, databricks, aws, azure, gcp, kafka, etl, data modelling]
+    boost_phrases: [graduate, junior, entry level, 0-2 years, 1-3 years]
+    penalty_title: [manager]
+    penalty_text: [5+ years, 7+ years, arabic speaker, uae nationals, saudi nationals]
+
+sources:
+  # 1. Company hiring systems with public JSON job boards. Zero cost, no blocking risk.
+  #    Find more with:  python -m jobhunter probe <company-slug> [...]
+  greenhouse:
+    enabled: true
+    boards:
+      - {token: careem, company: Careem}
+      - {token: tamara, company: Tamara}
+      - {token: okx, company: OKX}
+      - {token: stripe, company: Stripe}
+      - {token: databricks, company: Databricks}
+      - {token: mongodb, company: MongoDB}
+      - {token: datadog, company: Datadog}
+  lever:
+    enabled: true
+    boards:
+      - {site: binance, company: Binance}
+      - {site: fresha, company: Fresha}
+  ashby:
+    enabled: true
+    boards:
+      - {name: ziina, company: Ziina}
+  smartrecruiters:
+    enabled: true
+    max_pages: 5
+    companies:
+      - {id: RolandBerger, company: Roland Berger}
+  workday:
+    enabled: true
+    max_pages: 3
+    search: [Dubai, Abu Dhabi, Riyadh, Doha]    # Workday search text; per-board "search" overrides
+    boards:
+      - {host: mmc.wd1.myworkdayjobs.com, tenant: mmc, site: MMC, company: Marsh McLennan (Oliver Wyman / Mercer)}
+      - {host: accenture.wd103.myworkdayjobs.com, tenant: accenture, site: AccentureCareers, company: Accenture}
+      - {host: mastercard.wd1.myworkdayjobs.com, tenant: mastercard, site: CorporateCareers, company: Mastercard}
+      - {host: citi.wd5.myworkdayjobs.com, tenant: citi, site: "2", company: Citi}
+
+  # 2. Google for Jobs via SerpApi. Covers LinkedIn/Bayt/GulfTalent/company sites without scraping them.
+  #    Skipped automatically until SERPAPI_KEY is set. Budget: 3 queries x 2 runs/day = ~180 searches/month.
+  serpapi:
+    enabled: true
+    min_interval_hours: 12
+    queries:
+      - {q: strategy analyst, location: United Arab Emirates}
+      - {q: management consulting graduate, location: Saudi Arabia}
+      - {q: business analyst strategy, location: Qatar}
+
+  # 3. Job-alert emails the boards send you. Create alerts on LinkedIn, Bayt, GulfTalent, Naukrigulf and Indeed
+  #    first (see README). Skipped automatically until GMAIL_ADDRESS + GMAIL_APP_PASSWORD are set.
+  gmail_alerts:
+    enabled: true
+    trust_location: true      # the alert was already set up for your locations
+    lookback_days: 3
+    max_messages_per_sender: 30
+    senders:
+      - jobalerts-noreply@linkedin.com
+      - bayt.com
+      - gulftalent.com
+      - naukrigulf.com
+      - indeed.com

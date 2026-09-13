@@ -1,0 +1,22 @@
+{{ subject }}
+Run {{ run_time }} UTC: {{ report.scanned }} scanned, {{ report.candidates }} passed filters, {{ report.new }} new.
+
+{% for job in jobs %}
+[{{ job.score }}] {{ job.title }}
+    {{ [job.company, job.location]|select|join(" | ") }}
+    {{ job.url }}
+    {{ job.reasons|join("; ") }}
+{% if job.extra.pack_link %}
+    application pack: {{ job.extra.pack_link }}
+{% endif %}
+
+{% endfor %}
+{% if total > jobs|length %}
+...and {{ total - jobs|length }} more lower-scoring matches.
+{% endif %}
+{% if report.errors %}
+Source problems this run:
+{% for error in report.errors[:15] %}
+  - {{ error }}
+{% endfor %}
+{% endif %}

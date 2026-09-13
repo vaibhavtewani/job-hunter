@@ -1,0 +1,98 @@
+# WHO is applying. Source of truth for application packs: bullets are re-ordered per job but never rewritten.
+# Built from "CV's/Sudhanshu Gangboeer_Resume 3.pdf". Keep this private (it is committed to a private repo).
+
+candidate:
+  name: Sudhanshu Gangboeer
+  location: Madrid, Spain
+  email: gangboeersudhanshu@gmail.com
+  phones: ["+34 625 273 465", "+91 7587149352"]
+  linkedin: linkedin.com/in/Sudhanshu-Gangboeer
+  summary: "Strategy-focused MiM candidate at IE Business School with hands-on experience in management consulting, commercial strategy, and data-driven decision-making across consulting, technology, and entrepreneurship. McKinsey Forward Programme participant. Multilingual (English, Spanish, Hindi) with cross-cultural leadership across India, UK, and Spain. Open to relocation globally."
+
+education:
+  - institution: IE Business School
+    location: Madrid, Spain
+    degree: Master's in Management (MiM)
+    dates: Sep 2025 – Present
+    details: "Clubs: M&A Lab | Search Fund Lab (financial modelling, investment thesis, competitive intelligence) | Running Club"
+  - institution: Vellore Institute of Technology
+    location: Vellore, India
+    degree: Bachelor of Technology, Civil Engineering
+    dates: Sep 2020 – Jul 2024
+
+experience:
+  - title: Strategy Consultant (Pro Bono)
+    company: Blackmont Consulting
+    location: UK (Remote)
+    dates: Dec 2025 – Present
+    bullets:
+      - "Built a 3-year growth and partnership strategy for a community charity — mapped funding gaps, identified 5 grant and corporate channels, and prioritised initiatives by impact-to-effort ratio using a structured decision matrix."
+      - "Applied issue-tree and driver analysis frameworks to diagnose operational bottlenecks; delivered phased roadmap adopted in full by client leadership, with implementation underway across two workstreams."
+      - "Managed end-to-end engagement — scoping through delivery — producing stakeholder-ready outputs that earned sustained trust from senior client leadership across a 4-month consulting relationship."
+  - title: Strategy and Commercial Analyst
+    company: Cleartrip (Flipkart Group)
+    location: Bengaluru, India
+    dates: Jan 2025 – Jul 2025
+    bullets:
+      - "Managed 118+ hotel partner portfolios; engineered Excel dashboards integrating competitor benchmarking, discount logic, and pricing elasticity models — delivering 12–15% uplift in revenue across the portfolio."
+      - "Conducted structured root-cause analysis on underperforming accounts; achieved 100% client retention with 3 long-term contract renewals by translating complex data into clear stakeholder recommendations."
+      - "Synthesised market benchmarking and competitive intelligence to guide partners through high-stakes pricing decisions, improving long-term platform profitability and partner stickiness."
+  - title: Business Development Intern
+    company: SkilloVilla
+    location: Bengaluru, India
+    dates: Apr 2024 – Jun 2024
+    bullets:
+      - "Prospected 1,000+ leads and converted pipeline into INR 200,000+ in revenue through structured value communication and targeted negotiation; rebuilt BD playbooks improving team-wide funnel productivity."
+  - title: Founder and CEO
+    company: HypeHydrate
+    location: Bengaluru, India
+    dates: Jul 2023 – Apr 2024
+    bullets:
+      - "Founded a D2C hydration brand — designed ad-on-packaging B2B revenue model; managed end-to-end operations including supplier sourcing, product development, and brand partnerships over 10 months."
+      - "Built and tested a dual revenue business model combining direct product sales with B2B advertising inventory, demonstrating ability to identify unconventional commercial opportunities and execute independently."
+  - title: Summer Intern
+    company: Larsen and Toubro (Delhi Metro Project)
+    location: Delhi, India
+    dates: Jun 2023 – Jul 2023
+    bullets:
+      - "Coordinated daily operations for 40+ workers on a landmark public infrastructure project, ensuring full compliance with client and government quality standards across all workstreams."
+
+projects:
+  - title: McKinsey Forward Programme, Participant
+    org: McKinsey and Company
+    location: Global (Remote)
+    dates: Mar 2026 – Jul 2026
+    bullets:
+      - "Competitively selected for a 10-week McKinsey-designed programme covering structured problem-solving, business communication, stakeholder management, and Digital/AI application to real-world strategy challenges."
+      - "Applied hypothesis-driven analytical frameworks to live business cases under time pressure, sharpening consulting-grade judgement, executive communication, and professional output quality."
+  - title: Boomerang (AI Startup), Co-Founder
+    org: IE Business School
+    location: Madrid, Spain
+    dates: Sep 2025
+    bullets:
+      - "Co-founded an LLM and voice-cloning multilingual meeting platform with a 7-member cross-cultural team; built complete business model — GTM strategy, pricing architecture, financial projections, and investor pitch — receiving positive written commendation from the jury panel."
+      - "Scoped market opportunity through structured sizing analysis; estimated 40% reduction in cross-border meeting friction, demonstrating ability to merge technology, commercial logic, and user empathy into one cohesive investor-ready solution."
+
+skills:
+  Analytics: [Excel (Advanced), Financial Modelling, Market Sizing, Data Dashboards, Looker Studio, SPSS]
+  Tools and AI: [Python (Basics), ChatGPT, Claude, Gemini, Prompt Engineering, Canva, Figma]
+  Languages: [English (Proficient), Spanish (Beginner — actively developing), Hindi (Native)]
+
+cover_letter:
+  opening: "I am a Master's in Management candidate at IE Business School with hands-on experience in management consulting, commercial strategy and data-driven decision-making across consulting, technology and entrepreneurship."
+  closing: "I am open to relocating and would welcome the chance to discuss how I could contribute to {company}."
+
+# Answers to the screening questions almost every application form asks. Not in the CV: fill in the TODOs.
+standard_answers:
+  willing_to_relocate: "Yes, open to relocation globally"
+  languages: "English (Proficient), Hindi (Native), Spanish (Beginner)"
+  highest_education: "Master's in Management (MiM), IE Business School"
+  graduation_date: "TODO: MiM completion month/year"
+  nationality: "TODO"
+  current_work_authorization: "TODO: e.g. student residence permit in Spain"
+  requires_visa_sponsorship_gcc: "TODO: Yes/No"
+  notice_period: "TODO: e.g. available immediately / from <date>"
+  earliest_start_date: "TODO"
+  expected_salary: "TODO: per country, e.g. UAE AED x-y per month"
+  years_of_experience: "TODO: e.g. 1.5 years (Cleartrip, Blackmont, SkilloVilla)"
+  linkedin: linkedin.com/in/Sudhanshu-Gangboeer
