@@ -1,0 +1,18 @@
+# Copied from profile.yaml standard_answers. Fix TODOs there once, not per job.
+job:
+  title: KYC Operations Analyst
+  company: Citi
+  url: https://citi.wd5.myworkdayjobs.com/2/job/Dubai-United-Arab-Emirates/KYC-Operations-Analyst_26978628
+answers:
+  willing_to_relocate: Yes, open to relocation globally
+  languages: English (Proficient), Hindi (Native), Spanish (Beginner)
+  highest_education: Master's in Management (MiM), IE Business School
+  graduation_date: 'TODO: MiM completion month/year'
+  nationality: TODO
+  current_work_authorization: 'TODO: e.g. student residence permit in Spain'
+  requires_visa_sponsorship_gcc: 'TODO: Yes/No'
+  notice_period: 'TODO: e.g. available immediately / from <date>'
+  earliest_start_date: TODO
+  expected_salary: 'TODO: per country, e.g. UAE AED x-y per month'
+  years_of_experience: 'TODO: e.g. 1.5 years (Cleartrip, Blackmont, SkilloVilla)'
+  linkedin: linkedin.com/in/Sudhanshu-Gangboeer
